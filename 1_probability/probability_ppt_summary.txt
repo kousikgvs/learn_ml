@@ -1,0 +1,129 @@
+Probability PPT Summary
+=======================
+
+This file summarizes 14 PowerPoint presentations found in the 1_probability folder.
+The collection introduces core probability concepts, counting techniques, and the main rules used to compute event likelihoods.
+
+Main themes across the presentations:
+- Foundations of probability and probability distributions
+- Expected value and observed outcomes
+- Events, complements, and set relationships
+- Counting methods: factorials, permutations, combinations, and combinatorics
+- Probability rules: additive rule, multiplication rule, conditional probability, and Bayes law
+
+24. Probability.pptx
+Topic: What is Probability?
+Slides: 7
+Summary:
+- Probability is the measure of how likely an event is to occur. It is expressed as a value between 0 and 1, where 0 means impossible and 1 means certain.
+- The deck also defines an event as a specific outcome, or a set of outcomes, from a random experiment.
+- Example: When flipping a fair coin, the probability of getting heads is 1/2 because there are two equally likely outcomes.
+
+25. Expected vs Actual.pptx
+Topic: Expected v/s Actual Values
+Slides: 7
+Summary:
+- Expected value is presented as the long-run average outcome of a random process. The slides explain it as a weighted average of all possible outcomes using their probabilities.
+- The presentation distinguishes a trial from an experiment: a trial is one repetition, while an experiment is the full process containing many trials.
+- It also compares experimental probability, based on observed results, with theoretical probability, based on equally likely expected outcomes.
+- Example: For a fair die, the expected value is (1+2+3+4+5+6)/6 = 3.5, even though no single roll can produce 3.5.
+
+26. frequency.pptx
+Topic: Probability Frequency Distribution
+Slides: 7
+Summary:
+- A probability frequency distribution is described as a table that lists experiment outcomes together with their probabilities.
+- The deck uses examples such as repeated die rolls and grouped student test scores to show how outcomes and frequencies are recorded.
+- It connects the table view to histogram-based visualization for interpreting grouped probability distributions.
+- Example: If a die is rolled 60 times and the number 4 appears 9 times, the experimental probability of rolling a 4 is 9/60 = 0.15.
+
+27. event in probabl.pptx
+Topic: Complements in Probability
+Slides: 5
+Summary:
+- The presentation explains the complement of an event as everything not included in that event.
+- It introduces the complement rule, showing that the probability of an event not happening is found from the probability that it does happen.
+- A worked example uses a student passing or not passing a test to illustrate complement probability.
+- Example: If the probability of passing an exam is 0.75, then the probability of not passing is 1 - 0.75 = 0.25.
+
+28. Combinatorics.pptx
+Topic: Introduction to Combinatorics
+Slides: 7
+Summary:
+- Combinatorics is introduced as the branch of mathematics concerned with counting, arranging, and combining objects.
+- The deck frames combinatorics as a foundation for probability because it helps determine how many outcomes are possible.
+- Example: If you have 3 shirts and 2 pairs of pants, combinatorics tells you there are 3 x 2 = 6 possible outfits.
+
+29. Permutations.pptx
+Topic: Permutations
+Slides: 6
+Summary:
+- A permutation is defined as an arrangement where order matters.
+- The slides use examples such as license plate construction to show how to count ordered outcomes.
+- Example: The letters A, B, and C can be arranged in 6 ways: ABC, ACB, BAC, BCA, CAB, and CBA.
+
+30. Factorials operation.pptx
+Topic: Factorials Operation
+Slides: 6
+Summary:
+- The deck defines factorial, written as n!, as the product of positive integers from 1 to n.
+- It links factorials to counting arrangements of distinct objects.
+- Example problems use both (n+k)! and (n-k)! style scenarios to show how factorial expressions arise in practical counting questions.
+- Example: 5! = 5 x 4 x 3 x 2 x 1 = 120, so 5 distinct books can be arranged on a shelf in 120 different ways.
+
+32. Combinations.pptx
+Topic: Combinations
+Slides: 6
+Summary:
+- A combination is presented as a selection problem where order does not matter.
+- The slides contrast combinations with permutations and use an applicant-selection example to show the difference.
+- Example: Choosing 2 students from 5 gives C(5,2) = 10 possible groups because AB is the same group as BA.
+
+33. Mutually exclusive sets.pptx
+Topic: Mutually Exclusive Set
+Slides: 6
+Summary:
+- Mutually exclusive sets are defined as sets with no common elements.
+- In probability terms, the presentation explains that if one mutually exclusive event occurs, the other cannot occur at the same time.
+- The notation A ∩ B = ∅ is used to show that there is no overlap between the sets.
+- Example: In one roll of a die, the events "roll a 2" and "roll a 5" are mutually exclusive because both cannot happen together.
+
+34. Set dependencies.pptx
+Topic: Set Dependencies
+Slides: 8
+Summary:
+- Independent events are described as events where the outcome of one does not affect the outcome of the other.
+- Dependent events are contrasted as events where one outcome changes the likelihood of the next.
+- Example: Flipping a coin and rolling a die are independent, but drawing two cards from a deck without replacement creates dependent events.
+
+35. Conditional probability.pptx
+Topic: Conditional Probability
+Slides: 7
+Summary:
+- Conditional probability is explained as the probability of an event given that another event has already occurred.
+- The main idea is that probabilities can be updated when new information becomes available.
+- Example: If a card is known to be a spade, then the probability that it is the ace of spades becomes 1/13 instead of 1/52.
+
+36. The additive rule.pptx
+Topic: The Additive Rule
+Slides: 6
+Summary:
+- The additive rule is used to find the probability that at least one of two events occurs.
+- The deck emphasizes that the rule is especially important when events can overlap.
+- Example: In a 52-card deck, P(heart or king) = 13/52 + 4/52 - 1/52 = 16/52 because the king of hearts belongs to both events.
+
+37. The multiplication rule.pptx
+Topic: The Multiplication Rule
+Slides: 5
+Summary:
+- The multiplication rule is used to find the probability of events happening together in sequence.
+- The slides note that the calculation depends on whether the events are independent or dependent.
+- Example: The probability of flipping heads and then rolling a 6 is 1/2 x 1/6 = 1/12.
+
+38. The bayesian law.pptx
+Topic: The Bayesian Rule
+Slides: 9
+Summary:
+- Bayes' rule is introduced as a way to update prior beliefs when new evidence is observed, producing a posterior belief.
+- The presentation also covers the law of total probability to compute an overall probability by combining several conditional scenarios.
+- Example: In medical screening, Bayes' rule can be used to estimate the probability that a person actually has a disease after receiving a positive test result.

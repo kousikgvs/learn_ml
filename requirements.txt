@@ -17,6 +17,7 @@ seaborn
 # Notebook support
 jupyterlab
 ipykernel
+pydantic
 
 # Model persistence
 joblib
