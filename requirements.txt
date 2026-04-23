@@ -1,0 +1,22 @@
+# Core scientific computing
+numpy
+pandas
+scipy
+
+# Machine Learning (classification, regression, clustering)
+scikit-learn
+
+# Gradient boosting (classification & regression)
+xgboost
+lightgbm
+
+# Visualization
+matplotlib
+seaborn
+
+# Notebook support
+jupyterlab
+ipykernel
+
+# Model persistence
+joblib
