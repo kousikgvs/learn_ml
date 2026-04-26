@@ -1,0 +1,39 @@
+why mean = 0 and variance = 1
+
+Mean only tells the center of the data.
+It does not tell how spread out the data is.
+
+Variance tells the spread of the data around the mean.
+
+-5 0 5   - mean = 0
+-10 0 10 - mean = 0
+
+here the differentiating factor is variance it tells us how much shift of data is happening.
+
+1. Standard Deviation
+
+Standard deviation is the square root of variance.
+It tells spread in the same unit as the original data.
+
+Formula:
+
+standard deviation = sqrt(variance)
+
+2. Covariance
+
+Covariance tells how two features move together.
+
+- positive covariance: both increase together
+- negative covariance: one increases while the other decreases
+- near zero covariance: weak linear relation
+
+3. Covariance Matrix
+
+This is a table that stores covariance between every pair of features.
+
+PCA uses this matrix to find the main directions of variation in the data.
+
+4. Correlation
+
+Correlation is a scaled version of covariance.
+Its value usually lies between -1 and 1.
