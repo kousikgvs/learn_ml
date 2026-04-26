@@ -1,0 +1,149 @@
+DATASETS FOLDER SUMMARY
+=======================
+
+This folder contains the following CSV files and their attributes.
+
+1. breast_cancer_data.csv
+-------------------------
+Attributes:
+- id
+- diagnosis
+- radius_mean
+- texture_mean
+- perimeter_mean
+- area_mean
+- smoothness_mean
+- compactness_mean
+- concavity_mean
+- concave points_mean
+- symmetry_mean
+- fractal_dimension_mean
+- radius_se
+- texture_se
+- perimeter_se
+- area_se
+- smoothness_se
+- compactness_se
+- concavity_se
+- concave points_se
+- symmetry_se
+- fractal_dimension_se
+- radius_worst
+- texture_worst
+- perimeter_worst
+- area_worst
+- smoothness_worst
+- compactness_worst
+- concavity_worst
+- concave points_worst
+- symmetry_worst
+- fractal_dimension_worst
+
+Note: The header row ends with a trailing comma, which suggests there may be one extra empty unnamed column entry in the raw file.
+
+2. credit_data.csv
+------------------
+Attributes:
+- Time
+- V1
+- V2
+- V3
+- V4
+- V5
+- V6
+- V7
+- V8
+- V9
+- V10
+- V11
+- V12
+- V13
+- V14
+- V15
+- V16
+- V17
+- V18
+- V19
+- V20
+- V21
+- V22
+- V23
+- V24
+- V25
+- V26
+- V27
+- V28
+- Amount
+- Class
+
+3. diabetes.csv
+----------------
+Attributes:
+- Pregnancies
+- Glucose
+- BloodPressure
+- SkinThickness
+- Insulin
+- BMI
+- DiabetesPedigreeFunction
+- Age
+- Outcome
+
+4. fake_news_dataset.csv
+------------------------
+Attributes:
+- id
+- title
+- author
+- text
+- label
+
+5. iris_data.csv
+----------------
+Attributes:
+- Id
+- SepalLengthCm
+- SepalWidthCm
+- PetalLengthCm
+- PetalWidthCm
+- Species
+
+6. mail_data.csv
+----------------
+Attributes:
+- Category
+- Message
+
+7. Placement_Dataset.csv
+------------------------
+Attributes:
+- sl_no
+- gender
+- ssc_p
+- ssc_b
+- hsc_p
+- hsc_b
+- hsc_s
+- degree_p
+- degree_t
+- workex
+- etest_p
+- specialisation
+- mba_p
+- status
+- salary
+
+8. sonar data.csv
+-----------------
+Attributes:
+- This file does not contain a header row.
+- It appears to have 60 numeric feature columns.
+- The last column is the target/class label.
+- Label values appear to be category values such as R and M.
+
+Quick Summary
+-------------
+- Total CSV files: 8
+- Files with clear headers: 7
+- Files without a header row: 1 (sonar data.csv)
+- Other file in this folder: datasets.txt
