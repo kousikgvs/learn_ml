@@ -21,6 +21,10 @@ Ensemble Learning
 12. Gradient Boosting - Builds models step by step to reduce errors.
 13. XGBoost - A popular and powerful boosting algorithm used in interviews and competitions.
 
+Sample model for boosting:
+- Decision Tree - Boosting commonly uses a very small decision tree as the base model.
+- Decision Stump - This is a one-level decision tree and is the most common simple example in boosting.
+
 Unsupervised Learning
 
 14. K-Means - Groups similar data into clusters.

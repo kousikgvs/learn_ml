@@ -1,0 +1,44 @@
+Curse of Dimensionality
+
+where increasing the number of features (dimensions) beyond an optimal point fails to improve a model's accuracy and can actually degrade performance, increase computational complexity, and make the model overly complicated.
+
+As dimensions increase, data points become sparse and move further apart from each other. Because machine learning algorithms often rely on distance metrics (like measuring proximity to nearest neighbors), this sparsity makes it difficult for algorithms to find meaningful patterns or make accurate predictions.
+
+Simple explanation -
+
+Think of each feature as one new direction for the data.
+
+If a dataset has only 2 or 3 features, it is easier to see how points are grouped.
+For example, with height and weight, similar people may stay close to each other.
+
+But when we keep adding more and more features, the data spreads out.
+The points no longer stay close.
+Everything starts looking far away from everything else.
+
+This creates a problem for many machine learning models.
+Models like KNN depend on distance to find similar points.
+If all points are far apart, the model cannot easily decide which points are truly similar.
+
+Because of this:
+- learning becomes harder
+- the model may become slower
+- accuracy may stop improving
+- sometimes performance becomes worse
+
+In short, more features do not always mean a better model.
+After some point, too many features can add noise, confusion, and extra computation.
+
+Solution -
+
+Dimensionality Reduction
+
+- Feature selection
+    1) forward selection
+    2) backward elimination 
+- feature extraction
+    1) PCA
+    2) LDA
+    3) tsne
+
+
+

@@ -1,0 +1,275 @@
+Mean vs Variance in PCA
+
+Example -
+
+Set 1: -5, 0, 5
+Mean = 0
+
+Set 2: -10, 0, 10
+Mean = 0
+
+Both sets have the same mean.
+But they are not equally spread out.
+
+The second set is more spread out from the center.
+That is why mean alone is not enough.
+
+What is mean?
+
+Mean tells us the center of the data.
+It gives the average value.
+
+Formula:
+
+mean = (sum of all values) / number of values
+
+For both examples:
+
+(-5 + 0 + 5) / 3 = 0
+(-10 + 0 + 10) / 3 = 0
+
+So mean says both datasets are centered at 0.
+But mean does not tell us how far the values are from 0.
+
+What is variance?
+
+Variance tells us how much the values are spread around the mean.
+
+If values stay close to the mean, variance is low.
+If values are far from the mean, variance is high.
+
+Formula:
+
+variance = sum of (x - mean)^2 / n
+
+For Set 1:
+
+values: -5, 0, 5
+mean = 0
+
+( -5 - 0 )^2 = 25
+(  0 - 0 )^2 = 0
+(  5 - 0 )^2 = 25
+
+variance = (25 + 0 + 25) / 3 = 50 / 3 = 16.67
+
+For Set 2:
+
+values: -10, 0, 10
+mean = 0
+
+( -10 - 0 )^2 = 100
+(   0 - 0 )^2 = 0
+(  10 - 0 )^2 = 100
+
+variance = (100 + 0 + 100) / 3 = 200 / 3 = 66.67
+
+So both datasets have the same mean, but Set 2 has much higher variance.
+
+Why PCA uses variance
+
+PCA is not mainly interested in the average location of the data.
+PCA is interested in where the data changes the most.
+
+The direction with the highest variance contains the most information about how the data is spread.
+That direction becomes the first principal component.
+
+The direction with the second highest variance becomes the second principal component.
+
+Why do we want to maximize variance?
+
+We want to maximize variance because variance shows how much the data points differ from each other.
+
+If variance is very low in a direction, then almost all points look similar in that direction.
+That direction does not help much in separating the data.
+
+If variance is high in a direction, then the points are more spread out.
+That spread helps us see differences, patterns, and structure in the data.
+
+So PCA keeps the directions where the data has the biggest spread.
+Those directions usually preserve more useful information.
+
+Why do we want a feature or component to hold more variance?
+
+Because a component with more variance captures more of the original data behavior.
+It keeps more of the important differences between data points.
+
+If a component captures only a very small variance, removing it usually loses only a small amount of information.
+
+Simple example -
+
+Imagine a class of students.
+If all students have almost the same shoe size, then shoe size has low variance.
+It does not help much in telling students apart.
+
+But if exam marks vary a lot, then marks have high variance.
+They tell us more about how students are different from one another.
+
+PCA prefers directions like exam marks, where differences are more visible.
+
+What does "capturing more variance" mean?
+
+It means the principal component preserves more of the original spread of the data.
+
+So when we reduce dimensions, we want to keep the components that capture the most variance first.
+That way, we lose the least amount of useful information.
+
+Interview answer in one line -
+
+PCA maximizes variance because directions with higher variance usually contain more information, better separate the data points, and preserve more of the original structure of the dataset.
+
+Simple idea:
+
+- mean tells where the data is centered
+- variance tells how much the data moves
+- PCA keeps directions where the movement is largest
+
+Why larger variance matters in PCA
+
+If a feature has very low variance, it changes very little.
+That means it usually adds less information.
+
+If a feature or direction has high variance, it shows stronger variation across data points.
+That variation often helps separate patterns in the data.
+
+Real-life intuition -
+
+Imagine you are observing students.
+If every student has almost the same attendance, then attendance has low variance.
+It may not help much in distinguishing students.
+
+But if test scores vary a lot, then test score has high variance.
+It may help capture meaningful differences between students.
+
+So PCA tries to keep the directions that capture these meaningful differences.
+
+Important step before PCA
+
+Before applying PCA, we usually center the data by subtracting the mean.
+
+Why?
+
+Because PCA should measure spread around the center, not around zero by accident.
+
+In many cases, we also scale the features.
+
+Why scaling matters:
+
+- age may be between 20 and 60
+- salary may be between 20000 and 200000
+
+Without scaling, salary may dominate PCA only because its numbers are larger.
+
+Common scaling method:
+
+standardized value = (x - mean) / standard deviation
+
+Additional metrics and terms asked in interviews
+
+1. Standard Deviation
+
+Standard deviation is the square root of variance.
+It tells spread in the same unit as the original data.
+
+Formula:
+
+standard deviation = sqrt(variance)
+
+2. Covariance
+
+Covariance tells how two features move together.
+
+- positive covariance: both increase together
+- negative covariance: one increases while the other decreases
+- near zero covariance: weak linear relation
+
+PCA works using the covariance matrix of the data.
+
+3. Covariance Matrix
+
+This is a table that stores covariance between every pair of features.
+
+PCA uses this matrix to find the main directions of variation in the data.
+
+4. Correlation
+
+Correlation is a scaled version of covariance.
+Its value usually lies between -1 and 1.
+
+If two features are strongly correlated, PCA can combine their shared information.
+
+5. Eigenvectors and Eigenvalues
+
+These are very common interview terms in PCA.
+
+- eigenvectors give the directions of principal components
+- eigenvalues tell how much variance each component captures
+
+Higher eigenvalue means that component carries more information.
+
+6. Explained Variance
+
+Explained variance tells how much total information is captured by each principal component.
+
+Formula:
+
+explained variance ratio of a component = eigenvalue of that component / sum of all eigenvalues
+
+Example:
+
+If PC1 explains 80 percent variance and PC2 explains 15 percent variance,
+then the first two components together explain 95 percent of the data variation.
+
+7. Cumulative Explained Variance
+
+This tells how much total variance is captured by the first k principal components together.
+
+This helps us decide how many components to keep.
+
+Common interview question:
+
+How do you choose the number of principal components?
+
+Answer:
+Choose enough components to preserve a high percentage of explained variance, such as 90 percent, 95 percent, or 99 percent, depending on the problem.
+
+8. Feature Selection vs PCA
+
+This is also asked often.
+
+- feature selection keeps some original columns and removes others
+- PCA creates new columns from combinations of original columns
+
+So PCA is feature extraction, not feature selection.
+
+9. PCA assumptions and limitations
+
+- PCA works best when relationships are linear
+- PCA is affected by feature scale
+- PCA is sensitive to outliers
+- principal components are harder to interpret than original features
+
+10. When to use PCA
+
+- when the dataset has many features
+- when features are correlated
+- when you want faster training
+- when you want to reduce dimensionality
+- when you want to visualize high-dimensional data in 2D or 3D
+
+11. When PCA may not help
+
+- when interpretability is very important
+- when features are already few and useful
+- when the data has strong nonlinear patterns
+
+Interview-ready summary
+
+Mean only tells the center of the data.
+It does not tell how spread out the data is.
+
+Variance tells the spread of the data around the mean.
+PCA uses variance because directions with higher variance usually capture more useful structure and information.
+
+That is why two datasets with the same mean can still be very different for PCA.
+PCA cares about spread, not just center.

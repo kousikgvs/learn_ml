@@ -1,0 +1,53 @@
+This is a feature extraction technique
+
+Simple explanation -
+
+PCA stands for Principal Component Analysis.
+
+It is used when a dataset has many features.
+Some of those features may carry similar information.
+PCA combines that information into a smaller number of new features.
+
+These new features are called principal components.
+They keep the most important information from the original data.
+
+So, instead of working with many columns, we can work with fewer new columns.
+This makes the data easier to handle.
+
+Benefits of PCA -
+
+- reduces the number of features
+- removes some extra or repeated information
+- makes the model faster to train
+- helps reduce the curse of dimensionality
+- can make patterns easier to visualize
+- may improve model performance in some cases
+
+Example with features -
+
+Suppose we are working on student data.
+The dataset has these features:
+
+- study hours per day
+- attendance percentage
+- test score
+- assignment score
+- class participation
+
+Here, test score, assignment score, and class participation may all tell us something similar about overall academic performance.
+PCA can combine this related information into one new feature, such as a principal component that represents overall performance.
+
+So instead of using many separate columns, we can use fewer new columns that still keep most of the useful information.
+
+Real-life analogy -
+
+Imagine you want to describe a mango.
+You can talk about its weight, size, sweetness, color, and smell.
+Many of these details are connected and together describe the quality of the mango.
+
+Instead of remembering every small detail separately, your brain may summarize them into one simple idea like "good mango quality."
+PCA works in a similar way.
+It takes many related features and summarizes them into a smaller number of meaningful components.
+
+In simple words, PCA keeps the most useful parts of the data and removes less important parts.
+
