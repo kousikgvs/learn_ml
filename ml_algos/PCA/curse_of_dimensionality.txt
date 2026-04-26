@@ -40,5 +40,10 @@ Dimensionality Reduction
     2) LDA
     3) tsne
 
+Feature selection means selecting a subset of features from n features.
+where as feature extraction means forming new features from set of subset of features.
+
+
+
 
 
