@@ -1,0 +1,102 @@
+Ensemble learning - wisdom of the crowd.
+
+
+1) KBC crowd life line.
+2) Product Reviews.
+3) Democracy of Votes.
+
+
+1) M1 - Linear reg
+2) M2 - SVM
+3) M3 - Random forest
+
+1) M1 - Linear reg - chunk1
+2) M2 - Linear reg - chunk2
+3) M3 - Linear reg - chunk3
+
+
+different types of ensemble learning
+
+1) voting ensemble - base models are different algorithms
+one is SVM , logistic reg , random forest.
+
+2) bagging - random forest is special case
+Bagging - bootstrapped aggregation.
+
+we are using SVM Model
+
+Data - 1000 students 
+
+D1 pick randomly.
+D1 -> SVM
+D1 put into D , D2 picked again.
+D2 -> SVM
+D2 put into D , D3 picked again.
+D3 -> SVM
+
+
+3) boosting - very useful and powerful
+same model 
+Data -> LR1 -> LR2 -> LR3
+
+LR2 learns from the Mistakes of LR1
+LR3 learns from the Mistakes of LR2
+
+
+Disadvantages -
+
+1) training multiple models.
+
+Advantages -
+
+1) Improvement in performance.
+2) Bias and Variance.
+3) Low bias + Low variance.
+
+Bias - caused by over-simplifying the Model -
+
+1) It happens when model makes the strong assumptions about the data.
+2) high bias - model is too simple - underfitting.
+3) cannot capture underlying pattern.
+
+
+Variance - too much sensitivity to training data.
+
+1) High variance → model is too complex → overfitting.
+2) The model learns noise along with the pattern.
+3) Works very well on training data but poorly on new data.
+
+4) stacking - 
+base models are different algorithms
+one is SVM , logistic reg , random forest.
+
+Output model let us say KNN
+
+KNN input is 
+
+SVM output , Log reg , Random forest => KNN model.
+
+Stacking gives the weight to 3 models.
+SVM - w1
+Log reg - w2
+random forest - w3
+
+Boosting -
+
+1) adaboosting
+2) Gradient boosting
+3) XGBoost
+
+
+
+
+
+
+
+
+
+
+
+
+
+
