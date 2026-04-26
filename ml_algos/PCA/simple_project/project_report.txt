@@ -1,0 +1,112 @@
+PROJECT REPORT
+==============
+
+Title
+-----
+Logistic Regression on Diabetes Data With and Without PCA
+
+Project Objective
+-----------------
+The objective of this project is to compare the performance of a Logistic Regression model on the diabetes dataset before applying PCA and after applying PCA.
+
+Dataset Used
+------------
+Dataset file: C:\projects\learn_ml\datasets\diabetes.csv
+
+Dataset details:
+- Total rows: 768
+- Total columns: 9
+- Input features: 8
+- Target column: Outcome
+
+Feature names:
+- Pregnancies
+- Glucose
+- BloodPressure
+- SkinThickness
+- Insulin
+- BMI
+- DiabetesPedigreeFunction
+- Age
+
+Target:
+- Outcome
+
+Train-Test Split
+----------------
+The dataset was split into training and testing sets using the following setup:
+- Training set shape: (614, 8)
+- Test set shape: (154, 8)
+- Test size: 20%
+- Random state: 42
+- Stratified split: Yes
+
+Data Preprocessing
+------------------
+Before model training, the following preprocessing steps were applied:
+- Features and target were separated.
+- The dataset was divided into training and test sets.
+- StandardScaler was used to standardize the feature values.
+
+Model Used
+----------
+Algorithm: Logistic Regression
+
+The same Logistic Regression model was used in both cases:
+1. Without PCA
+2. With PCA
+
+Experiment 1: Logistic Regression Without PCA
+---------------------------------------------
+In the first experiment, Logistic Regression was trained on the standardized original feature set.
+
+Result:
+- Accuracy without PCA: 0.7143
+
+Experiment 2: Logistic Regression With PCA
+------------------------------------------
+In the second experiment, PCA was applied to the standardized feature set before training the model.
+
+Observed PCA output:
+- Explained variance ratio: [0.26073778, 0.21817547, 0.13091879, 0.10528263, 0.09731332, 0.08584814]
+- Total variance retained: 0.8983
+- PCA-transformed training shape: (614, 6)
+
+Result:
+- Accuracy with PCA: 0.7338
+
+Important Note
+--------------
+The notebook markdown and comparison label currently say "2 principal components", but the active PCA code is using 6 components:
+- pca = PCA(n_components=6)
+
+So the current reported PCA result is based on 6 principal components, not 2.
+
+Final Comparison
+----------------
+- Logistic Regression without PCA: 0.714286
+- Logistic Regression with PCA: 0.733766
+
+Difference:
+- Accuracy improvement with PCA: 0.019480
+- Approximate improvement in percentage points: 1.95
+
+Interpretation
+--------------
+The PCA-based model performed slightly better than the baseline model in the current notebook run.
+This suggests that reducing the data to the selected principal components preserved most of the useful information while slightly improving model performance.
+
+However, this conclusion applies to the current setup only, where:
+- Logistic Regression is the selected model
+- PCA uses 6 components in code
+- Results are based on one train-test split
+
+Conclusion
+----------
+This project demonstrates a comparison of Logistic Regression performance with and without PCA on the diabetes dataset.
+
+Based on the current notebook execution:
+- The model without PCA achieved an accuracy of 0.7143
+- The model with PCA achieved an accuracy of 0.7338
+
+Therefore, in this run, PCA improved the Logistic Regression accuracy slightly.
