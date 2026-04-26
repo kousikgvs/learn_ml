@@ -43,6 +43,122 @@ Dimensionality Reduction
 Feature selection means selecting a subset of features from n features.
 where as feature extraction means forming new features from set of subset of features.
 
+How do we perform feature selection?
+
+Feature selection means we do not use all columns.
+We try different combinations of original features and keep only the useful ones.
+
+The goal is:
+- remove irrelevant features
+- remove redundant features
+- make the model simpler
+- improve speed
+- sometimes improve accuracy
+
+Simple example -
+
+Suppose we want to predict house price.
+The dataset has these features:
+- area
+- number of rooms
+- age of house
+- distance from city
+- wall color
+
+Here, wall color may not help much in predicting house price.
+Feature selection helps us keep useful features like area, rooms, and distance, and remove less useful ones.
+
+1) Forward Selection
+
+In forward selection, we start with no features.
+Then we add one feature at a time.
+
+Steps:
+1. Start with an empty model.
+2. Train the model using each feature one by one.
+3. Pick the feature that gives the best performance.
+4. Now try adding one more feature to the selected feature.
+5. Again pick the combination that improves the model the most.
+6. Keep repeating until adding new features does not help much.
+
+Example:
+Suppose features are:
+- area
+- rooms
+- age
+- distance
+
+First check which single feature is best.
+Maybe area gives the best result, so select area.
+
+Now test:
+- area + rooms
+- area + age
+- area + distance
+
+If area + rooms works best, keep both.
+
+Then test:
+- area + rooms + age
+- area + rooms + distance
+
+Continue until the model stops improving.
+
+Simple idea:
+Forward selection builds the feature set step by step.
+
+2) Backward Elimination
+
+In backward elimination, we start with all features.
+Then we remove one feature at a time.
+
+Steps:
+1. Start with all features in the model.
+2. Train the model.
+3. Find the least useful feature.
+4. Remove that feature.
+5. Train the model again.
+6. Repeat until removing more features starts hurting performance.
+
+Example:
+Start with:
+- area
+- rooms
+- age
+- distance
+- wall color
+
+If wall color contributes the least, remove it first.
+
+Then test the remaining features.
+If age also adds very little, remove age.
+
+Keep doing this until the remaining features are the most useful ones.
+
+Simple idea:
+Backward elimination removes useless features one by one.
+
+How do we decide which feature is useful?
+
+This depends on the model and method.
+Common ways are:
+- model accuracy
+- cross-validation score
+- p-value in statistical models
+- feature importance from tree models
+- correlation with target
+
+Forward selection vs backward elimination
+
+- forward selection starts empty and adds features
+- backward elimination starts full and removes features
+- forward selection is useful when there are many features
+- backward elimination is useful when we can start with all features safely
+
+Interview one-line answer -
+
+Feature selection is performed by testing which original features help the model most and keeping only those useful features. In forward selection we add features one by one, and in backward elimination we remove features one by one.
+
 
 
 
