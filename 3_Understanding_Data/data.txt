@@ -1,0 +1,132 @@
+Univariate and Bivariate Analysis
+
+Understanding your data:
+
+1) Size of the data: number of rows and columns using `df.shape`
+2) Preview the data: first few rows using `df.head()`
+3) Check column data types: `df.info()`
+4) Find missing values: `df.isnull().sum()`
+5) View summary statistics: `df.describe()`
+6) Check duplicate rows: `df.duplicated().sum()`
+7) Measure correlation between numerical columns: `df.corr()`
+
+Univariate analysis:
+Analyze one variable at a time. It helps us understand the distribution, spread, frequency, and unusual values in a single column.
+
+Bivariate analysis:
+Analyze the relationship between two variables. It helps us understand association, trends, class-wise differences, and possible dependence between columns.
+
+Categorical columns:
+
+1) Count Plot
+What it is:
+A bar chart that shows the number of occurrences of each category.
+
+What analysis we can make:
+- Identify the most frequent and least frequent categories
+- Check whether the data is balanced or imbalanced
+- Detect rare categories
+- Compare class distribution in target columns such as yes/no, spam/not spam, placed/not placed
+
+2) Pie Chart
+What it is:
+A circular chart that shows the proportion or percentage contribution of each category to the whole.
+
+What analysis we can make:
+- Understand category share in percentage terms
+- Quickly see dominant categories
+- Useful when the number of categories is small
+- Not a good choice when there are too many categories because comparison becomes difficult
+
+Numerical data:
+
+1) Histogram
+What it is:
+A plot that groups numerical values into intervals called bins and shows how many observations fall into each bin. For example, one bin may cover 0-10 and another 10-20.
+
+What analysis we can make:
+- Understand the distribution of the data
+- See whether the data is normal, skewed left, or skewed right
+- Identify where most values are concentrated
+- Detect possible gaps, multiple peaks, and unusual values
+- Check the spread of the variable
+
+2) Distplot / Density Plot
+What it is:
+A plot that shows the distribution of numerical data using a smooth density curve. In older materials, distplot may also include a histogram with a kernel density estimate.
+
+What analysis we can make:
+- Understand the overall shape of the distribution
+- Check skewness of the data
+- See whether the data looks approximately normal
+- Compare distributions of multiple variables or groups more smoothly than with only histograms
+
+3) Boxplot
+What it is:
+A plot that summarizes a numerical variable using the five-number summary:
+- Minimum
+- Q1 or 25th percentile
+- Median or 50th percentile
+- Q3 or 75th percentile
+- Maximum
+
+Important terms:
+- IQR = Q3 - Q1
+- Lower bound = Q1 - 1.5 * IQR
+- Upper bound = Q3 + 1.5 * IQR
+- Values outside these bounds are considered potential outliers
+
+What analysis we can make:
+- Detect outliers easily
+- Understand the spread of the data
+- Compare medians across variables or groups
+- Identify skewness based on whisker length and median position
+- Check whether the data is tightly packed or widely spread
+
+Useful bivariate plots:
+
+1) Scatter Plot
+What it is:
+A plot that places one numerical variable on the x-axis and another on the y-axis. Each point represents one observation.
+
+What analysis we can make:
+- Identify positive, negative, or no relationship between two variables
+- Detect clusters and patterns
+- Find outliers
+- Check whether the relationship looks linear or non-linear
+
+2) Bar Plot
+What it is:
+A plot used to compare a numerical summary such as mean, sum, or count across categories.
+
+What analysis we can make:
+- Compare average values between groups
+- See which category has higher or lower values
+- Useful for comparing salary by department, marks by section, or survival rate by class
+
+3) Boxplot for category vs numerical column
+What it is:
+A boxplot where categories are on one axis and a numerical variable is on the other axis.
+
+What analysis we can make:
+- Compare distributions across categories
+- Check which category has higher median values
+- Detect group-wise outliers
+- Understand variation within each category
+
+4) Heatmap for correlation
+What it is:
+A color-coded matrix used to visualize correlation values between numerical columns.
+
+What analysis we can make:
+- Find strongly positive or strongly negative relationships
+- Detect multicollinearity between features
+- Select useful features for machine learning
+- Remove highly correlated duplicate information when needed
+
+Quick rule of thumb:
+- Use count plot or pie chart for categorical columns
+- Use histogram, density plot, and boxplot for numerical columns
+- Use scatter plot for numerical vs numerical analysis
+- Use bar plot or grouped boxplot for categorical vs numerical analysis
+- Use heatmap for correlation analysis among numerical features
