@@ -19,9 +19,9 @@ This creates a problem for many machine learning models.
 Models like KNN depend on distance to find similar points.
 If all points are far apart, the model cannot easily decide which points are truly similar.
 
-Because of this:
+Because of :
 - learning becomes harder
-- the model may become slower
+- the model mathisy become slower
 - accuracy may stop improving
 - sometimes performance becomes worse
 
