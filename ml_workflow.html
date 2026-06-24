@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine Learning Workflow — End to End</title>
+<style>
+  :root{
+    --bg:#0f1221;
+    --panel:#171a2e;
+    --panel2:#1e2240;
+    --ink:#e8ebff;
+    --muted:#a8b0d8;
+    --accent:#6c8cff;
+    --accent2:#27d0a8;
+    --accent3:#ffb454;
+    --danger:#ff6b8b;
+    --line:#2c3160;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(160deg,#0d1020,#141934 60%,#0d1020);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  header{
+    text-align:center;
+    padding:50px 20px 30px;
+    background:radial-gradient(1200px 400px at 50% -100px,rgba(108,140,255,.25),transparent);
+  }
+  header h1{
+    margin:0;
+    font-size:2.4rem;
+    letter-spacing:.5px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  header p{color:var(--muted);max-width:760px;margin:14px auto 0;font-size:1.05rem}
+  main{max-width:1080px;margin:0 auto;padding:10px 22px 80px}
+
+  section{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:26px 28px;
+    margin:26px 0;
+    box-shadow:var(--shadow);
+  }
+  h2{
+    margin-top:0;
+    font-size:1.55rem;
+    display:flex;align-items:center;gap:12px;
+  }
+  h2 .num{
+    flex:0 0 auto;
+    width:38px;height:38px;border-radius:10px;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#0b0e1c;font-weight:800;font-size:1.05rem;
+  }
+  h3{color:var(--accent2);margin:22px 0 8px;font-size:1.18rem}
+  h4{color:var(--accent3);margin:16px 0 6px;font-size:1.03rem}
+  p,li{color:var(--ink)}
+  .muted{color:var(--muted)}
+
+  /* Flowchart */
+  .flow{
+    display:flex;flex-direction:column;align-items:center;gap:0;margin:10px 0 6px;
+  }
+  .node{
+    width:min(560px,92%);
+    text-align:center;
+    padding:14px 18px;
+    border-radius:12px;
+    font-weight:600;
+    border:1px solid var(--line);
+    background:linear-gradient(180deg,var(--panel2),#181c36);
+  }
+  .node small{display:block;font-weight:400;color:var(--muted);margin-top:3px}
+  .node.start{background:linear-gradient(135deg,#2a3573,#1c2350);border-color:#3a4690}
+  .node.accent{border-color:var(--accent);box-shadow:0 0 0 1px rgba(108,140,255,.25) inset}
+  .node.green{border-color:var(--accent2)}
+  .node.orange{border-color:var(--accent3)}
+  .node.danger{border-color:var(--danger)}
+  .arrow{width:2px;height:26px;background:linear-gradient(var(--accent),var(--accent2));position:relative}
+  .arrow::after{
+    content:"";position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);
+    border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--accent2);
+  }
+
+  /* Tables */
+  table{
+    width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  }
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--panel2);color:var(--accent2);font-weight:700;letter-spacing:.3px}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:rgba(108,140,255,.06)}
+  code{
+    background:#0c0f20;border:1px solid var(--line);border-radius:6px;
+    padding:2px 7px;color:var(--accent3);font-size:.88em;
+  }
+  .formula{
+    background:#0c0f20;border:1px dashed var(--line);border-radius:10px;
+    padding:10px 14px;margin:8px 0;color:var(--accent);font-family:Consolas,monospace;
+  }
+
+  /* Grid cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:14px}
+  .card{
+    background:linear-gradient(180deg,var(--panel2),#181c36);
+    border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  }
+  .card h4{margin-top:0}
+  .pill{
+    display:inline-block;background:rgba(39,208,168,.12);color:var(--accent2);
+    border:1px solid rgba(39,208,168,.4);border-radius:999px;padding:2px 12px;
+    font-size:.8rem;margin:2px 4px 2px 0;
+  }
+  .pill.b{background:rgba(108,140,255,.12);color:var(--accent);border-color:rgba(108,140,255,.4)}
+  .pill.o{background:rgba(255,180,84,.12);color:var(--accent3);border-color:rgba(255,180,84,.4)}
+  .pill.d{background:rgba(255,107,139,.12);color:var(--danger);border-color:rgba(255,107,139,.4)}
+
+  .branch{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+  .branch .node{width:min(330px,100%)}
+
+  ul.tight{margin:6px 0;padding-left:22px}
+  ul.tight li{margin:3px 0}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+  .toc a{
+    color:var(--ink);text-decoration:none;border:1px solid var(--line);
+    background:var(--panel);padding:6px 13px;border-radius:999px;font-size:.85rem;
+  }
+  .toc a:hover{border-color:var(--accent);color:var(--accent)}
+  footer{text-align:center;color:var(--muted);padding:30px;font-size:.85rem}
+  .note{border-left:3px solid var(--accent3);padding:8px 14px;background:rgba(255,180,84,.06);border-radius:0 8px 8px 0;margin:12px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>End-to-End Machine Learning Workflow</h1>
+  <p>A complete reference of the ML pipeline — from data collection and exploratory analysis, through feature engineering, model training and tuning, to ensembles, evaluation and deployment.</p>
+  <nav class="toc">
+    <a href="#collect">1 · Data Collection</a>
+    <a href="#eda">2 · EDA</a>
+    <a href="#fe">3 · Feature Engineering</a>
+    <a href="#split">4 · Data Splitting</a>
+    <a href="#select">5 · Model Selection</a>
+    <a href="#train">6 · Training & CV</a>
+    <a href="#tune">7 · Hyperparameter Tuning</a>
+    <a href="#ensemble">8 · Ensembles</a>
+    <a href="#eval">9 · Evaluation</a>
+    <a href="#deploy">10 · Deployment</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- BIG PIPELINE FLOWCHART -->
+  <section id="pipeline">
+    <h2><span class="num">★</span>The Pipeline at a Glance</h2>
+    <div class="flow">
+      <div class="node start">Data Collection</div>
+      <div class="arrow"></div>
+      <div class="node accent">EDA <small>Explore · understand · visualize</small></div>
+      <div class="arrow"></div>
+      <div class="node accent">Feature Engineering <small>Transform · construct · select · extract</small></div>
+      <div class="arrow"></div>
+      <div class="node">Data Splitting <small>Train / Validation / Test</small></div>
+      <div class="arrow"></div>
+      <div class="node green">Model Selection <small>Classification vs Regression</small></div>
+      <div class="arrow"></div>
+      <div class="node green">Model Training</div>
+      <div class="arrow"></div>
+      <div class="node">K-Fold Cross Validation <small>Find the best model</small></div>
+      <div class="arrow"></div>
+      <div class="node orange">Hyperparameter Tuning</div>
+      <div class="arrow"></div>
+      <div class="node danger">Accuracy not satisfied? → Ensemble Methods <small>Bagging · Boosting · Stacking</small></div>
+      <div class="arrow"></div>
+      <div class="node">Model Evaluation</div>
+      <div class="arrow"></div>
+      <div class="node start">Model Deployment</div>
+    </div>
+  </section>
+
+  <!-- 1. DATA COLLECTION -->
+  <section id="collect">
+    <h2><span class="num">1</span>Data Collection</h2>
+    <p>Gather raw data from the relevant sources. The quality, quantity and relevance of the collected data set the upper limit on how well any model can perform.</p>
+    <div class="grid">
+      <div class="card"><h4>Sources</h4><p class="muted">Databases, CSV/Excel files, APIs, web scraping, sensors/IoT, surveys, public datasets.</p></div>
+      <div class="card"><h4>Goals</h4><p class="muted">Sufficient volume, representative samples, minimal collection bias, correct labels (if supervised).</p></div>
+      <div class="card"><h4>Checks</h4><p class="muted">Duplicates, leakage, time alignment, units consistency, schema validation.</p></div>
+    </div>
+  </section>
+
+  <!-- 2. EDA -->
+  <section id="eda">
+    <h2><span class="num">2</span>EDA — Exploratory Data Analysis</h2>
+    <p>Understand the data before modeling: is it <b>labelled</b> or <b>unlabelled</b>, and is the task <b>classification</b> or <b>regression</b>? Then visualize and study the distributions of numeric columns.</p>
+
+    <h3>Identifying the Problem Type</h3>
+    <div class="branch">
+      <div class="node green">Labelled data <small>Supervised Learning</small></div>
+      <div class="node orange">Unlabelled data <small>Unsupervised Learning</small></div>
+    </div>
+    <table>
+      <thead><tr><th>Aspect</th><th>Classification</th><th>Regression</th></tr></thead>
+      <tbody>
+        <tr><td>Target type</td><td>Categorical / discrete classes</td><td>Continuous numeric value</td></tr>
+        <tr><td>Question answered</td><td>"Which category?"</td><td>"How much / how many?"</td></tr>
+        <tr><td>Examples</td><td>Spam vs ham, disease yes/no, iris species</td><td>House price, temperature, sales forecast</td></tr>
+        <tr><td>Typical metrics</td><td>Accuracy, Precision, Recall, F1, ROC-AUC</td><td>MAE, MSE, RMSE, R²</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Data Visualization &amp; Distributions</h3>
+    <p>For each numeric column, determine whether it is <b>normally distributed</b>, <b>skewed</b>, or follows some other distribution — this decision drives later choices (imputation, outlier rule, scaling).</p>
+    <table>
+      <thead><tr><th>Goal</th><th>Plot</th></tr></thead>
+      <tbody>
+        <tr><td>Distribution of a numeric column</td><td>Histogram, KDE / density plot</td></tr>
+        <tr><td>Spread &amp; outliers</td><td>Box plot, violin plot</td></tr>
+        <tr><td>Relationship between two numerics</td><td>Scatter plot</td></tr>
+        <tr><td>Correlation among many features</td><td>Heatmap, pair plot</td></tr>
+        <tr><td>Category frequency</td><td>Bar / count plot</td></tr>
+        <tr><td>Normality check</td><td>Q-Q plot</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note"><b>Distribution shapes:</b> A symmetric bell curve → <span class="pill">Normal</span>. A long tail on one side → <span class="pill o">Skewed</span> (right/positive or left/negative). Neither → <span class="pill d">Other</span>. The shape decides the imputation value and outlier-detection formula used in Feature Engineering.</div>
+  </section>
+
+  <!-- 3. FEATURE ENGINEERING -->
+  <section id="fe">
+    <h2><span class="num">3</span>Feature Engineering</h2>
+    <p>Based on the problem statement, apply one or more of the four techniques below.</p>
+    <div class="flow">
+      <div class="node accent">Feature Engineering</div>
+      <div class="arrow"></div>
+      <div class="branch">
+        <div class="node">Feature Transformation</div>
+        <div class="node">Feature Construction</div>
+        <div class="node">Feature Selection</div>
+        <div class="node">Feature Extraction</div>
+      </div>
+    </div>
+
+    <!-- 3.1 Transformation -->
+    <h3>3.1 — Feature Transformation</h3>
+
+    <h4>a) Handling Missing Values</h4>
+    <table>
+      <thead><tr><th>Situation</th><th>Impute with</th></tr></thead>
+      <tbody>
+        <tr><td>No outliers / symmetric (normal) data</td><td><b>Mean</b></td></tr>
+        <tr><td>Data has outliers</td><td><b>Median</b></td></tr>
+      </tbody>
+    </table>
+
+    <h4>b) Encoding Categorical Values</h4>
+    <table>
+      <thead><tr><th>Encoding</th><th>When to use</th><th>Applied to</th></tr></thead>
+      <tbody>
+        <tr><td><b>Ordinal Encoding</b></td><td>Category has a natural order — e.g. "low" &lt; "medium" &lt; "high"</td><td>Input columns</td></tr>
+        <tr><td><b>Label Encoding</b> <span class="muted">(sklearn LabelEncoder)</span></td><td>No order in the data</td><td>Target column</td></tr>
+        <tr><td><b>One-Hot Encoding</b></td><td>No order among categories</td><td>Input columns</td></tr>
+      </tbody>
+    </table>
+
+    <h4>c) Outlier Detection &amp; Treatment</h4>
+    <p>First <b>detect</b> the valid range based on the distribution, then <b>treat</b> the points that fall outside it.</p>
+    <table>
+      <thead><tr><th>Distribution</th><th>Valid range (bounds)</th><th>Rationale</th></tr></thead>
+      <tbody>
+        <tr><td>Normally distributed</td><td class="formula">[ mean − 3·STD , mean + 3·STD ]</td><td>~99% of data lies within ±3σ</td></tr>
+        <tr><td>Skewed distribution</td><td class="formula">[ Q1 − 1.5·IQR , Q3 + 1.5·IQR ]</td><td>IQR-based fences (Tukey's method)</td></tr>
+        <tr><td>Neither skewed nor normal</td><td class="formula">[ 2.5th percentile , 97.5th percentile ]</td><td>Percentile (winsorizing) bounds</td></tr>
+      </tbody>
+    </table>
+    <p class="muted"><code>IQR = Q3 − Q1</code></p>
+    <table>
+      <thead><tr><th>Treatment</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><b>Trimming</b></td><td>Once the range is known, <b>remove</b> all rows whose values fall outside it.</td></tr>
+        <tr><td><b>Capping</b></td><td>Once the range is known, <b>replace</b> values outside it with the boundary value (lower/upper bound).</td></tr>
+      </tbody>
+    </table>
+
+    <h4>d) Feature Scaling</h4>
+    <table>
+      <thead><tr><th>Technique</th><th>When to apply</th><th>Typical range</th></tr></thead>
+      <tbody>
+        <tr><td><b>Normalization</b> (Min-Max)</td><td>When values now and in the future are known to stay within a specified, bounded range</td><td>[0, 1]</td></tr>
+        <tr><td><b>Standardization</b> (Z-score)</td><td>When the range of the numeric column is not known in advance</td><td>mean 0, std 1</td></tr>
+      </tbody>
+    </table>
+    <div class="formula">Normalization:  x' = (x − min) / (max − min)</div>
+    <div class="formula">Standardization:  x' = (x − mean) / STD</div>
+
+    <!-- 3.2 Construction -->
+    <h3>3.2 — Feature Construction</h3>
+    <p>Create new attributes from existing ones using <b>domain knowledge</b> (e.g. BMI from height &amp; weight, "price per sq.ft" from price and area, day-of-week from a date).</p>
+
+    <!-- 3.3 Selection -->
+    <h3>3.3 — Feature Selection</h3>
+    <p>Select only the <b>important features</b> for model training — reduces noise, overfitting and training time.</p>
+    <div>
+      <span class="pill b">Filter methods (correlation, chi²)</span>
+      <span class="pill b">Wrapper methods (RFE)</span>
+      <span class="pill b">Embedded methods (Lasso, tree importance)</span>
+    </div>
+
+    <!-- 3.4 Extraction -->
+    <h3>3.4 — Feature Extraction</h3>
+    <p><b>PCA (Principal Component Analysis)</b> — dimensionality reduction that combines multiple features into fewer composite features for analysis, while retaining most of the variance.</p>
+    <div class="note">Selection <b>keeps a subset</b> of original features; Extraction <b>creates new combined</b> features.</div>
+  </section>
+
+  <!-- 4. DATA SPLITTING -->
+  <section id="split">
+    <h2><span class="num">4</span>Data Splitting</h2>
+    <p>Partition the prepared data so the model is evaluated on data it never saw during training.</p>
+    <div class="branch">
+      <div class="node green">Training set <small>fit the model</small></div>
+      <div class="node">Validation set <small>tune &amp; compare</small></div>
+      <div class="node orange">Test set <small>final unbiased check</small></div>
+    </div>
+    <p class="muted" style="text-align:center">Common split ratios: 70/15/15 or 80/10/10. Use stratified splitting for imbalanced classification.</p>
+  </section>
+
+  <!-- 5. MODEL SELECTION -->
+  <section id="select">
+    <h2><span class="num">5</span>Model Selection</h2>
+    <p>The candidate algorithms depend on whether the problem is <b>classification</b> or <b>regression</b>.</p>
+    <table>
+      <thead><tr><th>Classification models</th><th>Regression models</th></tr></thead>
+      <tbody>
+        <tr><td>Logistic Regression</td><td>Linear Regression</td></tr>
+        <tr><td>Naive Bayes</td><td>Ridge / Lasso Regression</td></tr>
+        <tr><td>K-Nearest Neighbors</td><td>K-Nearest Neighbors Regressor</td></tr>
+        <tr><td>Decision Tree / Random Forest</td><td>Decision Tree / Random Forest Regressor</td></tr>
+        <tr><td>SVM (classifier)</td><td>SVR (Support Vector Regressor)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6. TRAINING + CV -->
+  <section id="train">
+    <h2><span class="num">6</span>Model Training &amp; K-Fold Cross Validation</h2>
+    <p>Train the selected models, then use <b>K-Fold Cross Validation</b> to reliably estimate performance and pick the best model — instead of trusting a single train/test split.</p>
+    <h3>How K-Fold Works (K = 5 example)</h3>
+    <table>
+      <thead><tr><th>Iteration</th><th>Fold 1</th><th>Fold 2</th><th>Fold 3</th><th>Fold 4</th><th>Fold 5</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><span class="pill o">Test</span></td><td>Train</td><td>Train</td><td>Train</td><td>Train</td></tr>
+        <tr><td>2</td><td>Train</td><td><span class="pill o">Test</span></td><td>Train</td><td>Train</td><td>Train</td></tr>
+        <tr><td>3</td><td>Train</td><td>Train</td><td><span class="pill o">Test</span></td><td>Train</td><td>Train</td></tr>
+        <tr><td>4</td><td>Train</td><td>Train</td><td>Train</td><td><span class="pill o">Test</span></td><td>Train</td></tr>
+        <tr><td>5</td><td>Train</td><td>Train</td><td>Train</td><td>Train</td><td><span class="pill o">Test</span></td></tr>
+      </tbody>
+    </table>
+    <p class="muted">The final score is the <b>average</b> across all K folds — giving a robust estimate to compare and select the best model.</p>
+  </section>
+
+  <!-- 7. TUNING -->
+  <section id="tune">
+    <h2><span class="num">7</span>Hyperparameter Tuning</h2>
+    <p>Having chosen the model, try it out with different parameter settings to squeeze out the best performance.</p>
+    <table>
+      <thead><tr><th>Method</th><th>Idea</th></tr></thead>
+      <tbody>
+        <tr><td><b>Grid Search</b></td><td>Exhaustively try every combination in a defined grid</td></tr>
+        <tr><td><b>Random Search</b></td><td>Sample random combinations — faster over large spaces</td></tr>
+        <tr><td><b>Bayesian Optimization</b></td><td>Use past results to choose promising next settings</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">Examples of hyperparameters: <code>k</code> in KNN, <code>max_depth</code> in trees, <code>C</code> &amp; <code>gamma</code> in SVM, learning rate in boosting.</p>
+  </section>
+
+  <!-- 8. ENSEMBLES -->
+  <section id="ensemble">
+    <h2><span class="num">8</span>Ensemble Methods</h2>
+    <p>If the accuracy is <b>still not satisfactory</b> after tuning, combine multiple models to boost performance.</p>
+    <div class="branch">
+      <div class="node green">Bagging</div>
+      <div class="node orange">Boosting</div>
+      <div class="node accent">Stacking</div>
+    </div>
+    <table>
+      <thead><tr><th>Method</th><th>How it works</th><th>Reduces</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td><b>Bagging</b></td><td>Train many models in <b>parallel</b> on bootstrap samples, then average / vote</td><td>Variance</td><td>Random Forest</td></tr>
+        <tr><td><b>Boosting</b></td><td>Train models <b>sequentially</b>, each correcting the previous one's errors</td><td>Bias</td><td>AdaBoost, Gradient Boosting, XGBoost</td></tr>
+        <tr><td><b>Stacking</b></td><td>Combine predictions of several base models via a <b>meta-model</b></td><td>Both</td><td>Stacked generalization</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 9. EVALUATION -->
+  <section id="eval">
+    <h2><span class="num">9</span>Model Evaluation</h2>
+    <p>Measure final performance on the held-out test set using metrics appropriate to the problem type.</p>
+    <table>
+      <thead><tr><th>Classification metrics</th><th>Regression metrics</th></tr></thead>
+      <tbody>
+        <tr><td>Accuracy</td><td>MAE — Mean Absolute Error</td></tr>
+        <tr><td>Precision &amp; Recall</td><td>MSE — Mean Squared Error</td></tr>
+        <tr><td>F1-Score</td><td>RMSE — Root Mean Squared Error</td></tr>
+        <tr><td>Confusion Matrix</td><td>R² — Coefficient of Determination</td></tr>
+        <tr><td>ROC-AUC</td><td>Adjusted R²</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 10. DEPLOYMENT -->
+  <section id="deploy">
+    <h2><span class="num">10</span>Model Deployment</h2>
+    <p>Put the validated model into production so it can serve predictions, then monitor and maintain it.</p>
+    <div class="flow">
+      <div class="node green">Serialize model <small>pickle / joblib / ONNX</small></div>
+      <div class="arrow"></div>
+      <div class="node">Wrap in an API <small>Flask / FastAPI</small></div>
+      <div class="arrow"></div>
+      <div class="node">Containerize &amp; serve <small>Docker / cloud</small></div>
+      <div class="arrow"></div>
+      <div class="node orange">Monitor &amp; retrain <small>drift, performance decay</small></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  End-to-End Machine Learning Workflow · Reference sheet · learn_ml
+</footer>
+</body>
+</html>
