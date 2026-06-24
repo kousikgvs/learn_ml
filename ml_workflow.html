@@ -138,6 +138,15 @@
   .toc a:hover{border-color:var(--accent);color:var(--accent)}
   footer{text-align:center;color:var(--muted);padding:30px;font-size:.85rem}
   .note{border-left:3px solid var(--accent3);padding:8px 14px;background:rgba(255,180,84,.06);border-radius:0 8px 8px 0;margin:12px 0}
+  /* Original prompt block */
+  .prompt-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+  .prompt-box{
+    background:#0c0f20;border:1px solid var(--line);border-radius:12px;
+    padding:18px 20px;white-space:pre-wrap;word-wrap:break-word;
+    font-family:Consolas,"Courier New",monospace;font-size:.9rem;line-height:1.55;
+    color:var(--muted);max-height:520px;overflow:auto;
+  }
+  .prompt-box strong{color:var(--accent3)}
 </style>
 </head>
 <body>
@@ -155,6 +164,7 @@
     <a href="#ensemble">8 · Ensembles</a>
     <a href="#eval">9 · Evaluation</a>
     <a href="#deploy">10 · Deployment</a>
+    <a href="#prompt">Original Prompt</a>
   </nav>
 </header>
 
@@ -431,6 +441,35 @@
       <div class="arrow"></div>
       <div class="node orange">Monitor &amp; retrain <small>drift, performance decay</small></div>
     </div>
+  </section>
+
+  <!-- ORIGINAL PROMPT -->
+  <section id="prompt">
+    <h2><span class="num">¶</span>Original Prompt</h2>
+    <div class="prompt-meta">
+      <span class="pill b">Model: Claude Opus 4.8</span>
+      <span class="pill">Verbatim request that generated this page</span>
+    </div>
+    <div class="prompt-box">Data CollectionEDA - exploring data analysis - Understanding the data whether its labelled dataset or unlabelled dataset , classification problem vs regression problem ... , Data Visualization , distributions for numeric columns whether they are normally distributed or skewed distributed or other distribution.Feature Engineering - Based on the problem statement we use one or more methods from below.
+
+- feature transformation - missing values (mean if no outliers or symmetric data and median if data has outliers) , categorical values (if the labelled data has order "low" , "medium" , "high" then its ordinal encoding , label encoding - For target column where there is no order in the data can use label encoder from sklearn , one-hot encoding for input columns where there is no order) , First detect outlier data(if normally distributed data then (mean-3*STD , mean+3*STD) in this range where the 99% data stays and for skewed distribution data (Q1 - 1.5*IQR , Q1 + 1.5*IQR) and data is neitheir skewed nor normally distributed then we go with (2.5th percentile , 97.5th percentile)) and remove them (Trimming(when we detect outliers we get to know the range right , just remove those which are outside the range) and Capping(when we detect outliers we get to know the range right , just replace those which are outside the range)) , feature scaling(Normalization applied when we know that present and future the values would be in a specified range and Standardization is applied when we are not aware of the range of the numeric column prior.)
+- feature construction - create new attributes based on the domain knowledge.
+- feature selection - just select important features for model training.
+- feature extraction - PCA - dimensionality reduction - combine multple features into single feature for analysis.
+
+Data Splitting Model Selection - Depends on whether the problem is classification or regression.Model Training
+
+K-fold cross validation - To find the best model.Hyperparameter Tuning - We got the Model we want to tryout with different parameters.
+
+if Still the <strong>Accuracy </strong>is not satisfied then we Move on to <strong>Ensemble methods-</strong>
+
+- Bagging.
+- Boosting.
+- Stacking.
+
+Model Evaluation.Model Deployment.
+
+in the current folder create a HTML file mentioning all the above content mentioned with diagrams and tables</div>
   </section>
 
 </main>
